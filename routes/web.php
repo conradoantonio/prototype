@@ -11,6 +11,17 @@
 |
 */
 
+#Root url
 Route::get('/', function () {
-    return view('login');
+	return auth()->check() ? redirect()->action('LoginController@dashboard') : view('login');
 });
+
+#Route url
+Route::post('/login', 'LoginController@index');
+
+#Admin url
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('dashboard', 'LoginController@dashboard')->middleware('role:Administrador');
+    Route::get('users', 'UsersController@index')->middleware('role:Administrador');
+});
+

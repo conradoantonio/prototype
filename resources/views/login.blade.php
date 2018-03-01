@@ -25,19 +25,14 @@
                     <div class="col-xs-12 col-sm-8 col-sm-push-2 col-sm-pull-2 col col-md-6 col-md-push-3 col-md-pull-3">
                         <div class="tiles white p-t-20 p-l-15 p-r-15 p-b-30">
                             <h2 class="text-center">Login <span class="semi-bold text-success">Prototype</span></h2>
-                            <form class="m-t-30 m-l-15 m-r-15" method="POST" action="login" autocomplete="off">
+                            <form class="m-t-30 m-l-15 m-r-15" method="POST" action="login" autocomplete="off" id="form-log">
                                 {!! csrf_field() !!}
-                                <div class="form-group {{ $errors->has('correo') || $errors->has('status') ? ' error' : '' }}" style="padding-bottom: 1px;">
+                                <div class="form-group {{ $errors->has('msg') ? ' error' : '' }}" style="padding-bottom: 1px;">
                                     <div class="controls">
-                                        <input type="text" class="form-control" id="correo" name="correo" value="{{ @session('account') ? session('account') : '' }}" placeholder="Correo">
-                                        @if ($errors->has('correo'))
+                                        <input type="text" class="form-control" id="email" name="email" value="{{ @session('email') ? session('email') : '' }}" placeholder="Correo">
+                                        @if ($errors->has('msg'))
                                             <span class="show-error">
-                                                <strong>{{ $errors->first('correo') }}</strong>
-                                            </span>
-                                        @endif
-                                        @if ($errors->has('status'))
-                                            <span class="show-error">
-                                                <strong>{{ $errors->first('status') }}</strong>
+                                                <strong>{{ $errors->first('msg') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -54,11 +49,8 @@
                     </div>
                 </div>
             </div>
-            
         </div>
-        
         <script src="{{ asset('js/jquery.js') }}"></script>
-        <script src="{{ asset('js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('plugins/boostrapv3/js/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/pace/pace.min.js') }}" type="text/javascript"></script>
     </body>

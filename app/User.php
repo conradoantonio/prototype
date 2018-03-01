@@ -10,6 +10,13 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -26,4 +33,27 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the rol of the current user.
+     *
+     */
+    public function role()
+    {
+        return $this->hasOne('App\Role', 'id', 'role_id');
+    }
+
+    /**
+     * Check the role of the current user.
+     *
+     */
+    public function checkRole($roles)
+    {
+        foreach ($roles as $role) {
+            if ($this->role->role == $role) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

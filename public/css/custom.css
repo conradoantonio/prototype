@@ -1,0 +1,71 @@
+.last-li-item{
+	margin-bottom: 10%;
+}
+.footer-widget, .header-seperation, .page-sidebar, .details-status, .header .notifcation-center, .page-sidebar.mini{
+	background-color: #D334B7 !important;
+}
+.header .nav > li.dropdown .active, .page-sidebar.mini .page-sidebar-wrapper > ul > li > a:hover, .page-sidebar.mini .page-sidebar-wrapper > ul > li:hover > a{
+	background-color: #D334B7;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li.open > a, .page-sidebar .page-sidebar-wrapper > ul > li > a:hover, .page-sidebar .page-sidebar-wrapper > ul > li:hover > a{
+	background-color: #D33362;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li > a, .page-sidebar .page-sidebar-wrapper > ul > li a i{
+	color: white;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li > ul.sub-menu {
+	background-color: transparent !important;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li > ul.sub-menu > li a:hover {
+	background-color: #D33362 !important;
+	color: #808285 !important;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li > ul.sub-menu > li.active{
+	background-color: #D33362 !important;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li > ul.sub-menu > li a{
+	color: #808285 !important;
+}
+/* Color de los iconos */
+.page-sidebar .page-sidebar-wrapper > ul > li > a i{
+	color: #838084 !important;
+}
+.page-sidebar .page-sidebar-wrapper > ul > li.active {
+	background-color: #D33362 !important;
+}
+/* Imagen del menú lateral */
+.menu-picture {
+	background: url('../img/barra_lateral.jpg');
+	background-repeat: no-repeat!important;
+    background-size: cover;
+	/* background-repeat: no-repeat!important; */
+}
+.page-sidebar .page-sidebar-wrapper > ul > li.active > a, .page-sidebar .page-sidebar-wrapper > ul > li > a{
+	color: #808285 !important;
+}
+#errores_list{
+	padding: 0px;
+	list-style: none;
+}
+#errores_list li{
+	padding: 0px;
+	color: firebrick;
+	font-weight: 600;
+}
+li.list-group-item span{
+    font-weight: bold;
+}
+li.list-group-item > span.label_show > span{
+    font-weight: normal!important;
+}
+li.main-li{
+	color: white !important;
+}
+li.li-img span{
+	display: block!important;
+}
+	
+/*li.active a{
+	font-weight: 600 !important;
+	color: white !important;
+}*/
