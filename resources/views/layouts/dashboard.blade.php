@@ -1,24 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<style>
-th {
-    text-align: center!important;
-}
-textarea {
-    resize: none;
-}
-.table td.text {
-    max-width: 177px;
-}
-.table td.text span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    max-width: 100%;
-}
-</style>
+
 <div class="content">
     <div class="page-title text-center">
         <h3>Dashboard </h3>
@@ -88,6 +71,48 @@ textarea {
     </div>
 </div>
 <script type="text/javascript">
+var ctx = $("#myChart");
 
+var data = {
+    labels: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    datasets: [
+        {
+            label: "Ventas de última semana en Pesos (MXN)",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [1000, 2000, 4000, 5000, 6000, 7000, 8000],
+            spanGaps: false,
+        }
+    ]
+};
+
+var myLineChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
 </script>
 @endsection

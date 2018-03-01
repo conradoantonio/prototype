@@ -22,6 +22,17 @@ Route::post('/login', 'LoginController@index');
 #Admin url
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('dashboard', 'LoginController@dashboard')->middleware('role:Administrador');
+
+	#Faqs CRUD
+	Route::middleware(['role:Administrador'])->prefix('faqs')->group(function () {
+    	Route::get('/', 'FaqsController@index');
+    	Route::post('save', 'FaqsController@save');
+    	Route::post('update', 'FaqsController@update');
+    	Route::post('delete', 'FaqsController@delete');
+    	Route::post('delete/multiple', 'FaqsController@delete_multiple');
+	});
+
+
     Route::get('users', 'UsersController@index')->middleware('role:Administrador');
 });
 

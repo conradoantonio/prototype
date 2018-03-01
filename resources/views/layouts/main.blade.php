@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="base-url" content="{{ url() }}">
+        <meta name="base-url" content="{{ url('') }}">
         <title></title>
         <link rel="stylesheet" href="{{ asset('plugins/pace/pace-theme-flash.css')}}"  type="text/css" media="screen"/>
         <link rel="stylesheet" href="{{ asset('plugins/jquery-scrollbar/jquery.scrollbar.css')}}"  type="text/css"/>
@@ -29,7 +29,6 @@
     </head>
 
     <body>
-
         <div class="header navbar navbar-inverse">
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="navbar-inner">
@@ -46,7 +45,7 @@
                     <!-- END MOBILE HEADER -->
                     <!-- BEGIN LOGO -->
                     <a href="{{url('dashboard')}}">
-                        <img src="{{ asset('img/logo.png') }}" class="logo" alt="" data-src="{{ asset('img/logo.png') }}" data-src-retina="{{ asset('img/logo.png') }}" width="70" height="30"/>
+                        <img src="{{ asset('img/logo.png') }}" class="logo" alt="" data-src="{{ asset('img/logo.png') }}" data-src-retina="{{ asset('img/logo.png') }}" width="110" height="20"/>
                     </a>
                     <!-- END LOGO -->
                     <!-- BEGIN LOGO NAV BUTTONS -->
@@ -155,41 +154,6 @@
                     </li>
                     <!-- END SELECTED LINK -->
 
-                    <!-- BEGIN SINGLE LINK -->
-                    <li class="{{$menu == 'Servicios' ? 'active' : ''}}">
-                        <a href="{{url('servicios')}}">
-                            <i class="fa fa-cut" aria-hidden="true"></i>
-                            <span class="title">Servicios</span>
-                        </a>
-                    </li>
-                    <!-- END SINGLE LINK -->
-
-                     <!-- BEGIN SINGLE LINK -->
-                    <li class="{{$menu == 'Servicios historial' ? 'active' : ''}}">
-                        <a href="{{url('servicios/historial')}}">
-                            <i class="fa fa-history" aria-hidden="true"></i>
-                            <span class="title">Servicios finalizados</span>
-                        </a>
-                    </li>
-                    <!-- END SINGLE LINK -->
-
-                     <!-- BEGIN SINGLE LINK -->
-                    <li class="{{$menu == 'Servicios cancelados' ? 'active' : ''}}">
-                        <a href="{{url('servicios/cancelados')}}">
-                            <i class="fa fa-ban" aria-hidden="true"></i>
-                            <span class="title">Servicios cancelados</span>
-                        </a>
-                    </li>
-                    <!-- END SINGLE LINK -->
-
-                    <!-- BEGIN SINGLE LINK -->
-                    <li class="{{$menu == 'Categorías' ? 'active' : ''}}">
-                        <a href="{{url('categorias-crud')}}">
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                            <span class="title">Categorías</span>
-                        </a>
-                    </li>
-                    <!-- END SINGLE LINK -->
 
                     <!-- BEGIN SINGLE LINK -->
                     <li class="{{$menu == 'Banners' ? 'active' : ''}}">
@@ -198,21 +162,6 @@
                             <span class="title">Banners</span>
                         </a>
                     </li>
-                    <!-- END SINGLE LINK -->
-
-                    <li class="{{$menu == "Artlook's" ? 'open start' : ''}}">
-                        <a href="javascript:;">
-                            <i class="fa fa-male" aria-hidden="true"></i>
-                            <span class="title">Artlook's</span>
-                            <span class="{{$menu == "Artlook's" ? 'arrow open' : 'arrow'}}"></span>
-                        </a>
-                        <ul class="sub-menu" style="{{$menu == "Artlook's" ? 'display: block;' : ''}}">
-                            <li class="{{$title == "Listado de artlook's" ? 'active' : ''}}"><a href="{{url('artlooks')}}">Listado</a></li>
-                            <li class="{{$title == 'Documentos' ? 'active' : ''}}"><a href="{{url('documentos')}}">Documentos</a></li>
-                            <li class="{{$title == 'Pagos' ? 'active' : ''}}"><a href="{{url('pagos')}}">Pagos</a></li>
-                        </ul>
-                    </li>
-
                     <!-- END SINGLE LINK -->
 
                     <!-- BEGIN SINGLE LINK -->
@@ -234,10 +183,10 @@
                     <!-- END SINGLE LINK -->
 
                     <!-- BEGIN SINGLE LINK -->
-                    <li class="{{$menu == 'Códigos postales' ? 'active' : ''}}">
-                        <a href="{{url('codigos_postales')}}">
-                            <i class="fa fa-road" aria-hidden="true"></i>
-                            <span class="title">Códigos postales</span>
+                    <li class="{{$menu == 'Noticias' ? 'active' : ''}}">
+                        <a href="{{url('faqs')}}">
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            <span class="title">Preguntas frecuentes</span>
                         </a>
                     </li>
                     <!-- END SINGLE LINK -->
@@ -270,7 +219,6 @@
                     </li>
                     <!-- END ONE LEVEL MENU -->
                     
-
                     <!-- BEGIN SINGLE LINK -->
                     <li class="loggingOut">
                         <a href="#">
@@ -560,7 +508,7 @@
                     closeOnConfirm: false
                 },
                 function() {
-                    window.location.href = "{{url()}}";
+                    window.location.href = "{{url('')}}";
                 });
             });
         </script>
