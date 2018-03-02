@@ -72,6 +72,21 @@ CREATE TABLE `cards` (
 
 /*Data for the table `cards` */
 
+/*Table structure for table `configurations` */
+
+DROP TABLE IF EXISTS `configurations`;
+
+CREATE TABLE `configurations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notice_privacy` text,
+  `terms_conditions` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `configurations` */
+
 /*Table structure for table `faqs` */
 
 DROP TABLE IF EXISTS `faqs`;
@@ -81,6 +96,8 @@ CREATE TABLE `faqs` (
   `question` text NOT NULL,
   `answer` text NOT NULL,
   `img` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -129,18 +146,6 @@ CREATE TABLE `news` (
 
 /*Data for the table `news` */
 
-/*Table structure for table `notice_privacy` */
-
-DROP TABLE IF EXISTS `notice_privacy`;
-
-CREATE TABLE `notice_privacy` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-/*Data for the table `notice_privacy` */
-
 /*Table structure for table `roles` */
 
 DROP TABLE IF EXISTS `roles`;
@@ -149,11 +154,11 @@ CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `roles` */
 
-insert  into `roles`(`id`,`role`) values (1,'Administrador');
+insert  into `roles`(`id`,`role`) values (1,'Administrador'),(2,'Cliente');
 
 /*Table structure for table `service_details` */
 
@@ -226,18 +231,6 @@ CREATE TABLE `statuses` (
 
 insert  into `statuses`(`id`,`name`) values (1,'Activo'),(2,'Pendiente'),(3,'Rechazado'),(4,'Bloqueado');
 
-/*Table structure for table `terms_conditions` */
-
-DROP TABLE IF EXISTS `terms_conditions`;
-
-CREATE TABLE `terms_conditions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-/*Data for the table `terms_conditions` */
-
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -259,9 +252,11 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
+
+insert  into `users`(`id`,`password`,`name`,`lastname`,`email`,`img`,`phone`,`conekta_customer_id`,`role_id`,`social_network`,`player_id`,`status`,`remember_token`,`created_at`,`updated_at`) values (1,'$2y$10$WKY9J1RDcn9/5Va9C9QDWOHCbfWSdXYTAf6akZgQFhJEBfmVh8eL6','Conrado','Carrillo','anton_con@hotmail.com','img/default.jpg','6691293591',NULL,1,NULL,NULL,1,'jipo4N8KxeHsaIqFo1354M7ZiFoYYPNqvdv8Ity2vSUZtYh0m7HFXnMdey9p','2018-02-28 18:09:35','0000-00-00 00:00:00'),(2,'$2y$10$WKY9J1RDcn9/5Va9C9QDWOHCbfWSdXYTAf6akZgQFhJEBfmVh8eL6','Antonio','Rosales','conrado.carrillo@gmail.com','img/default.jpg','6699333627',NULL,2,NULL,NULL,1,NULL,'2018-03-01 12:40:06','0000-00-00 00:00:00');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
