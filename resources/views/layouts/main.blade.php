@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>@yield('title', isset($title) ? $title .' | World Look' : 'World Look')</title>
+        <title>@yield('title', isset($title) ? $title .' | Prototype' : 'Prototype')</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -183,9 +183,9 @@
                     <!-- END SINGLE LINK -->
 
                     <!-- BEGIN SINGLE LINK -->
-                    <li class="{{$menu == 'Noticias' ? 'active' : ''}}">
-                        <a href="{{url('faqs')}}">
-                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    <li class="{{$menu == 'Faqs' ? 'active' : ''}}">
+                        <a href="{{url('admin/faqs')}}">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
                             <span class="title">Preguntas frecuentes</span>
                         </a>
                     </li>
