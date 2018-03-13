@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 		if (auth()->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1])) {
-            return redirect()->to('dashboard');
+            return redirect()->to('admin/dashboard');
         } else {
             $user = User::where('email', $request['email'])->first();
             if ( !$user ) {

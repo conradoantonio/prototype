@@ -26,7 +26,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 	#Faqs CRUD
 	Route::middleware(['role:Administrador'])->prefix('faqs')->group(function () {
     	Route::get('/', 'FaqsController@index');
-        Route::get('form/{$id}', 'FaqsController@form');
+        Route::get('form/{id?}', 'FaqsController@form');
     	Route::post('save', 'FaqsController@save');
     	Route::post('update', 'FaqsController@update');
     	Route::post('delete', 'FaqsController@delete');

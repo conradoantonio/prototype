@@ -23,7 +23,7 @@ textarea {
 </style>
 <div class="text-center" style="margin: 20px;">
     
-    <h2>Lista de {{$title}}</h2>
+    <h2>Lista de preguntas frecuentes</h2>
 
     <div class="row-fluid">
         <div class="span12">
@@ -31,7 +31,8 @@ textarea {
                 <div class="grid-title">
                     <h4>Opciones <span class="semi-bold">adicionales</span></h4>
                     <div>
-                        <a href=""><button type="button" class="btn btn-primary" id="new-row">Agregar noticia</button></a>
+                        <a href="{{url('admin/faqs/form')}}"><button type="button" class="btn btn-primary" id="new-row"><i class="fa fa-plus"></i> Agregar</button></a>
+                        <button type="button" class="btn btn-danger" id="delete-rows"><i class="fa fa-trash"></i> Agregar</button>
                     </div>
                     <div class="grid-body">
                         <div class="table-responsive" id="table-container">
@@ -48,9 +49,9 @@ textarea {
 <script src="{{ asset('plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/datatables.responsive.js') }}" type="text/javascript"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/lodash.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/datatables.js') }}"></script>
-<script src="{{ asset('js/validacionesNoticias.js') }}"></script>
-<script src="{{ asset('js/noticiasAjax.js') }}"></script> 
+<script src="{{ asset('js/validadFunctions.js') }}"></script>
+<script src="{{ asset('js/generalAjax.js') }}"></script>
+<script src="{{ asset('js/generalFunctions.js') }}"></script>
 <script type="text/javascript">
 
 $('#form_noticia').on('hidden.bs.modal', function (e) {
@@ -60,7 +61,7 @@ $('#form_noticia').on('hidden.bs.modal', function (e) {
 
 $('body').delegate('#nueva_noticia','click', function() {
     $("form#noticias").get(0).setAttribute('action', "{{url('/noticias/guardar')}}");
-    $('h4#titulo_form_noticias').text('Nueva noticia');
+    $('h4#titulo_form_noticias').text('Nueva pregunta frecuente');
     $("#form_noticia .form-control").val('');
     $("div#foto").hide();
     $('#form_noticia').modal();
@@ -72,7 +73,7 @@ $('body').delegate('.eliminar_noticia','click', function() {
     var id = $(this).parent().parent().attr('id');
 
     swal({
-        title: "¿Realmente desea eliminar la noticia con el id " + "<span style='color:#F8BB86'>" + noticia_id + "</span>?",
+        title: "¿Realmente desea eliminar la pregunta frecuente con el id " + "<span style='color:#F8BB86'>" + noticia_id + "</span>?",
         text: "¡Cuidado!",
         html: true,
         type: "warning",

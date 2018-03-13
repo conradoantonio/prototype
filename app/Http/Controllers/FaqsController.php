@@ -63,7 +63,7 @@ class FaqsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $req)
+    public function update(Request $req)
     {
         $faq = Faq::find($req->id);
         if ($faq) {
@@ -71,7 +71,7 @@ class FaqsController extends Controller
 
 	        $faq->question = $req->question;
 	        $faq->answer = $req->answer;
-	        $faq->img = $img;
+	        $img ? $faq->img = $img : '';
 
 	        $faq->save();
 

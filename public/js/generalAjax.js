@@ -2,7 +2,7 @@
 //Plagiado por: Conrado Carrillo
 function ajaxForm(form_id, config) {
     var formData = new FormData($("form#"+form_id)[0]);
-    var button = $("form#"+form_id).find('button.guardar-form');
+    var button = $("form#"+form_id).find('button.save');
     $.ajax({
         method: "POST",
         url: $("form#"+form_id).attr('action'),
@@ -11,28 +11,43 @@ function ajaxForm(form_id, config) {
         contentType: false,
         processData: false,
         success: function(data) {
-            button.children('i.fa-spin').hide();
-            button.attr('disabled', false);
-            $('div.modal').modal('hide');
+            swal.close();
             swal({
-                title: "<small>Bien</small>",
-                text: data.msg ? data.msg : "¡Cambios guardados exitosamente!",
-                type: data.status ? data.status : "success",
-                showLoaderOnConfirm: false,
-                html: true,
+                title: 'Bien: ',
+                icon: data.status ? data.status : "success",
+                content: {
+                    element: "div",
+                    attributes: {
+                        innerHTML:"<p class='text-response'>"+data.msg ? data.msg : "¡Cambios guardados exitosamente!"+"</p>"
+                    },
+                },
                 timer: 2000
-            });
-            refreshTable(window.location.href, config.columna, config.tabla_id, config.tabla_contenedor);
+            }).catch(swal.noop);
+
+            if (config.refresh) {
+                refreshTable(data.url, config.column, config.table_id, config.tabla_contenedor);
+            }
         },
         error: function(xhr, status, error) {
-            $('div.modal').modal('hide');
-            button.children('i').hide();
-            button.attr('disabled', false);
+            if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+                //display = JSON.parse(xhr.responseText).msg;
+                  //the json is ok
+            } else {
+                  //the json is not ok
+            }
+            swal.close();
+            console.warn(JSON.parse(xhr.responseText));
+            console.info(display);
             swal({
-                title: "<small>¡Error!</small>",
-                text: "Se encontró un problema guardando los datos: <br><span>" + JSON.parse(xhr.responseText).msg + "</span><br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>",
-                html: true
-            });
+                title: '¡Error!',
+                icon: 'error',
+                content: {
+                    element: "div",
+                    attributes: {
+                        innerHTML:"Se encontró un problema guardando los datos: <br><span>" + display + "</span><br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>"
+                    },
+                },
+            }).catch(swal.noop);
         }
     });
 }
@@ -52,7 +67,7 @@ function ajaxMultiple(data) {
                 showLoaderOnConfirm: false,
                 html: true
             });
-            refreshTable(window.location.href, data.columna, data.tabla_id, data.tabla_contenedor);
+            refreshTable(window.location.href, data.columna, data.table_id, data.tabla_contenedor);
         },
         error: function(xhr, status, error) {
             swal({
@@ -116,16 +131,16 @@ function ajaxMSimple(data) {
     });
 }
 
-function refreshTable(url, columna, tabla_id, id_container) {
-    var table = tabla_id ? $("table#"+tabla_id).dataTable() : $("table#example3").dataTable();
-    var container = id_container ? $("div#"+id_container) : $('div#table_container');
+function refreshTable(url, column, table_id, container_id) {
+    var table = table_id ? $("table#"+table_id).dataTable() : $("table#example3").dataTable();
+    var container = container_id ? $("div#"+container_id) : $('div#table_container');
     table.fnDestroy();
     container.fadeOut();
     container.empty();
     container.load(url, function() {
         container.fadeIn();
-        $(tabla_id ? "table#"+tabla_id : "table#example3").dataTable({
-            "aaSorting": [[ columna ? columna : 1, "desc" ]]
+        $(table_id ? "table#"+table_id : "table#example3").dataTable({
+            "aaSorting": [[ column ? column : 1, "desc" ]]
         });
     });
 }
