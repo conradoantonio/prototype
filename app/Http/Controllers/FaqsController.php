@@ -55,7 +55,7 @@ class FaqsController extends Controller
 
         $faq->save();
 
-        return response(['msg' => 'Nueva pregunta frecuente registrada correctamente', 'status' => 'success', 'url' => url('faqs')], 200);
+        return response(['msg' => 'Nueva pregunta frecuente registrada correctamente', 'status' => 'success', 'url' => url('admin/faqs')], 200);
     }
 
     /**
@@ -75,10 +75,10 @@ class FaqsController extends Controller
 
 	        $faq->save();
 
-	        return response(['msg' => 'Pregunta frecuente actualizada correctamente', 'status' => 'success', 'url' => url('faqs')], 200);
+	        return response(['msg' => 'Pregunta frecuente actualizada correctamente', 'status' => 'success', 'url' => url('admin/faqs')], 200);
         }
 
-	    return response(['msg' => 'No se encontró la pregunta frecuente a editar', 'status' => 'error', 'url' => url('faqs')], 200);
+	    return response(['msg' => 'No se encontró la pregunta frecuente a editar', 'status' => 'error', 'url' => url('admin/faqs')], 404);
     }
 
     /**
@@ -94,9 +94,9 @@ class FaqsController extends Controller
         //->update(['status' => $req->status]);
 
         if ($catalogs) {
-            return response(['msg' => 'Éxito cambiando el status de '.$msg, 'status' => 'success', 'url' => url('catalogos')], 200);
+            return response(['msg' => 'Éxito cambiando el status de '.$msg, 'status' => 'success', 'url' => url('admin/faqs')], 200);
         } else {
-            return response(['msg' => 'Error al cambiar el status de '.$msg, 'status' => 'error', 'url' => url('catalogos')], 404);
+            return response(['msg' => 'Error al cambiar el status de '.$msg, 'status' => 'error', 'url' => url('admin/faqs')], 404);
         }
     }
 }

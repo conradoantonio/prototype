@@ -21,23 +21,27 @@ function ajaxForm(form_id, config) {
                         innerHTML:"<p class='text-response'>"+data.msg ? data.msg : "¡Cambios guardados exitosamente!"+"</p>"
                     },
                 },
+                buttons: false,
+                closeOnEsc: false,
+                closeOnClickOutside: false,
                 timer: 2000
             }).catch(swal.noop);
 
             if (config.refresh) {
                 refreshTable(data.url, config.column, config.table_id, config.tabla_contenedor);
+            } else if(config.redirect) {
+                setTimeout( function() {
+                    window.location.href = data.url;
+                }, '2000');
             }
         },
         error: function(xhr, status, error) {
-            if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-                //display = JSON.parse(xhr.responseText).msg;
-                  //the json is ok
-            } else {
-                  //the json is not ok
-            }
             swal.close();
-            console.warn(JSON.parse(xhr.responseText));
-            console.info(display);
+            if (/^[\],:{}\s]*$/.test(xhr.responseText.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+                display = JSON.parse(xhr.responseText).msg;
+            } else {
+                display = '';
+            }
             swal({
                 title: '¡Error!',
                 icon: 'error',

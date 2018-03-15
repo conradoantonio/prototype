@@ -98,19 +98,19 @@ btn_form.on('click', function() {
             var arr_extensions = [];
 
             if ( $(this).hasClass('image') ){
-                arr_extensions = $.merge(arr_extensions, imgExtension)
+                arr_extensions = $.merge(arr_extensions, imgExtension);
             }
 
             if ( $(this).hasClass('excel') ){
-                arr_extensions = $.merge(arr_extensions, excelExtension)
+                arr_extensions = $.merge(arr_extensions, excelExtension);
             }
 
             if ( $(this).hasClass('word') ){
-                arr_extensions = $.merge(arr_extensions, wordtension)
+                arr_extensions = $.merge(arr_extensions, wordtension);
             }
 
             if ( $(this).hasClass('pdf') ){
-                arr_extensions = $.merge(arr_extensions, pdfExtension)
+                arr_extensions = $.merge(arr_extensions, pdfExtension);
             }
 
             if ( $(this).val() ) {
@@ -152,6 +152,7 @@ btn_form.on('click', function() {
         }).catch(swal.noop);
 
         config = {
+            'redirect'      : form.data('redirect'),
             'refresh'       : form.data('refresh'),
             'column'        : form.data('column'),
             'table_id'      : form.data('table_id'),

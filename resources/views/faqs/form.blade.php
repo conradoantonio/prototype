@@ -20,7 +20,7 @@
                     <div class="grid-body">
                         <h3>Datos</h3>
                     	<div class="container-fluid content-body">
-                            <form id="form-data" action="{{url('admin/faqs')}}/{{ $faq ? 'update' : 'save' }}" onsubmit="return false;" enctype="multipart/form-data" method="POST" autocomplete="off" data-column="0" data-refresh="0" data-table_id="example3" data-container_id="table_container">
+                            <form id="form-data" action="{{url('admin/faqs')}}/{{ $faq ? 'update' : 'save' }}" onsubmit="return false;" enctype="multipart/form-data" method="POST" autocomplete="off" data-column="0" data-refresh="0" data-redirect="1" data-table_id="example3" data-container_id="table_container">
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12 hide">
                                         <div class="form-group">

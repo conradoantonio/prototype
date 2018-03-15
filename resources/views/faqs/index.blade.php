@@ -27,12 +27,12 @@ textarea {
 
     <div class="row-fluid">
         <div class="span12">
-            <div class="grid simple ">
+            <div class="grid simple">
                 <div class="grid-title">
                     <h4>Opciones <span class="semi-bold">adicionales</span></h4>
                     <div>
                         <a href="{{url('admin/faqs/form')}}"><button type="button" class="btn btn-primary" id="new-row"><i class="fa fa-plus"></i> Agregar</button></a>
-                        <button type="button" class="btn btn-danger" id="delete-rows"><i class="fa fa-trash"></i> Agregar</button>
+                        <button type="button" class="btn btn-danger" id="delete-rows"><i class="fa fa-trash"></i> Eliminar</button>
                     </div>
                     <div class="grid-body">
                         <div class="table-responsive" id="table-container">
@@ -49,9 +49,9 @@ textarea {
 <script src="{{ asset('plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/datatables.responsive.js') }}" type="text/javascript"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/lodash.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/validadFunctions.js') }}"></script>
+<script src="{{ asset('js/validFunctions.js') }}"></script>
 <script src="{{ asset('js/generalAjax.js') }}"></script>
-<script src="{{ asset('js/generalFunctions.js') }}"></script>
+{{-- <script src="{{ asset('js/generalFunctions.js') }}"></script> --}}
 <script type="text/javascript">
 
 $('#form_noticia').on('hidden.bs.modal', function (e) {
