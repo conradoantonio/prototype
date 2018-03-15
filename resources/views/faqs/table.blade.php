@@ -10,7 +10,7 @@
     <tbody id="" class="">
         @if(count($faqs) > 0)                    
             @foreach($faqs as $faq)
-                <tr>
+                <tr id="{{$faq->id}}">
                     <td class="small-cell v-align-middle">
                         <div class="checkbox check-success">
                             <input id="checkbox{{$faq->id}}" type="checkbox" class="checkDelete" value="1">

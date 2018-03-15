@@ -56,7 +56,7 @@ function ajaxForm(form_id, config) {
     });
 }
 
-function ajaxMultiple(data) {
+function ajaxSimple(data) {
     url = baseUrl.concat(data.url);
     $.ajax({
         method: "POST",
@@ -160,7 +160,7 @@ function fill_text(response, modal_id) {
             $( ".data-fill" ).find( "."+prop_name ).closest('.fill-container').removeClass('hide');
         }
     }
-    if (modal_id){
+    if (modal_id) {
         $('div#'+modal_id).modal();
     }
 }
