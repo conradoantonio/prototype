@@ -16,8 +16,13 @@ Route::get('/', function () {
 	return auth()->check() ? redirect()->action('LoginController@dashboard') : view('login');
 });
 
+#Login view
+Route::get('login', function () {
+    return view('login');
+})->name('login');
+
 #Route url
-Route::post('/login', 'LoginController@index');
+Route::post('login', 'LoginController@index');
 
 #Admin url
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -32,7 +37,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     	Route::post('delete', 'FaqsController@delete');
 	});
     
-
     Route::get('users', 'UsersController@index')->middleware('role:Administrador');
 });
 

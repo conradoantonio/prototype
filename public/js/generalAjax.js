@@ -28,11 +28,49 @@ function ajaxForm(form_id, config) {
             }).catch(swal.noop);
 
             if (config.refresh) {
-                refreshTable(data.url, config.column, config.table_id, config.tabla_contenedor);
+                refreshTable(data.url, config.column, config.table_id, config.container_id);
             } else if(config.redirect) {
                 setTimeout( function() {
                     window.location.href = data.url;
                 }, '2000');
+            }
+        },
+        error: function(xhr, status, error) {
+            displayAjaxError(xhr, status, error);
+        }
+    });
+}
+
+function ajaxFormModal(form_id, config) {
+    var formData = new FormData($("form#"+form_id)[0]);
+    var button = $("form#"+form_id).find('button[type="submit"]');
+    $.ajax({
+        method: "POST",
+        url: $("form#"+form_id).attr('action'),
+        data: formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            $('div.modal').modal('hide');
+            swal.close();
+            swal({
+                title: 'Bien: ',
+                icon: data.status ? data.status : "success",
+                content: {
+                    element: "div",
+                    attributes: {
+                        innerHTML:"<p class='text-response'>"+data.msg ? data.msg : "¡Cambios guardados exitosamente!"+"</p>"
+                    },
+                },
+                buttons: false,
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+                timer: 2000
+            }).catch(swal.noop);
+
+            if (config.refresh) {
+                refreshTable(data.url, config.column, config.table_id, config.container_id);
             }
         },
         error: function(xhr, status, error) {
@@ -50,7 +88,7 @@ function ajaxSimple(config) {
             $('div.modal').modal('hide');
             swal.close();
             if (config.refresh) {
-                refreshTable(data.url, config.column, config.table_id, config.tabla_contenedor);
+                refreshTable(data.url, config.column, config.table_id, config.container_id);
             } else if(config.redirect) {
                 setTimeout( function() {
                     window.location.href = data.url;
@@ -115,6 +153,7 @@ function ajaxMSimple(data) {
 }
 
 function refreshTable(url, column, table_id, container_id) {
+    $('.delete-rows').attr('disabled', true);
     var table = table_id ? $("table#"+table_id).dataTable() : $("table#example3").dataTable();
     var container = container_id ? $("div#"+container_id) : $('div#table-container');
     table.fnDestroy();
@@ -145,6 +184,7 @@ function fill_text(response, modal_id) {
 }
 
 function displayAjaxError(xhr, status, error) {
+    $('div.modal').modal('hide');
     swal.close();
     if (/^[\],:{}\s]*$/.test(xhr.responseText.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         display = JSON.parse(xhr.responseText).msg;

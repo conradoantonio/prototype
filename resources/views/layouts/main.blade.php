@@ -366,11 +366,6 @@
         <script type="text/javascript">
             var baseUrl = "{{url('')}}";
             window.b_url = "{{url('')}}";
-            $('#change-pass, #cambiar_foto_usuario_sistema').on('hidden.bs.modal', function (e) {
-                $('#change-pass div.form-group').removeClass('has-error');
-                $('input.form-control').val('');
-                $('input#foto_usuario_sistema').val('');
-            });
 
             $('body').delegate('button#cambiar-password','click', function() {
                 $('#change-pass div.form-group').removeClass('has-error');//Remueve los errores de los campos

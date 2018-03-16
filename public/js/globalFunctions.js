@@ -1,13 +1,27 @@
 $(function() {
+    //Set up the ajax to include csrf token on header
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
+    //Fade in the containers
     setTimeout(function() {
         $('div.row-fluid, div.form-container').fadeIn('low');
     }, 500);
+
+    //Verify if the button for delete multiple can be actionable
+    $('body').delegate('.checkDelete','click', function() {
+        var ids_lenght = [];
+        $("input.checkDelete").each(function() {
+            if($(this).is(':checked')) {
+                ids_lenght.push($(this).parent().parent().siblings("td:nth-child(2)").text());
+            }
+        });
+
+        $('.delete-rows').attr('disabled', ids_lenght.length > 0 ? false : true);
+    });
 
     //Set up the select 2 inputs
     $(".select2").select2();

@@ -21,13 +21,11 @@ textarea {
 }
 ul#error_list {
 	list-style-type: none;
-}
-
-ul#error_list {
 	padding: 0px;
 	color: firebrick;
 	font-weight: 600;
 }
+
 /*.last-li-item{
 	margin-bottom: 10%;
 }
@@ -71,15 +69,6 @@ ul#error_list {
 }
 .page-sidebar .page-sidebar-wrapper > ul > li.active > a, .page-sidebar .page-sidebar-wrapper > ul > li > a{
 	color: #808285 !important;
-}
-#errores_list{
-	padding: 0px;
-	list-style: none;
-}
-#errores_list li{
-	padding: 0px;
-	color: firebrick;
-	font-weight: 600;
 }
 li.list-group-item span{
     font-weight: bold;

@@ -152,6 +152,7 @@ $(function(){
                 }
             }).catch(swal.noop);
 
+            ajaxType = form.data('ajax-type');
             config = {
                 'redirect'      : form.data('redirect'),
                 'refresh'       : form.data('refresh'),
@@ -159,7 +160,8 @@ $(function(){
                 'table_id'      : form.data('table_id'),
                 'container_id'  : form.data('container_id'),
             }
-            ajaxForm(form.attr('id'), config);
+            if (ajaxType == 'ajax-form') { ajaxForm(form.attr('id'), config); }
+            if (ajaxType == 'ajax-form') { ajaxFormModal(form.attr('id'), config); }
         } else {
             swal({
                 title: 'Verifique los siguientes campos: ',

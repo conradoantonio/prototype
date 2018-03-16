@@ -8,7 +8,7 @@
         <th>Acciones</th>
     </thead>
     <tbody>
-        @if(count($faqs) > 0)                    
+        @if($faqs)                    
             @foreach($faqs as $faq)
                 <tr>
                     <td class="small-cell v-align-middle">
@@ -21,7 +21,7 @@
                     <td>{{$faq->question}}</td>
                     <td class="text"> <span>{{$faq->answer}}</span></td>
                     <td>
-                        <a class="document-read" href="{{url($faq->img)}}" data-lightbox='preview' data-title='Imágen'>Ver foto actual <i class="fa fa-file-image-o" aria-hidden="true"></i></a>
+                        <a class="document-read" href="{{url($faq->img)}}" data-lightbox='preview' data-title="Imágen">Ver foto actual <i class="fa fa-file-image-o" aria-hidden="true"></i></a>
                     </td>
                     <td>
                         <a href="{{url("admin/faqs/form/$faq->id")}}"><button type="button" class="btn btn-info edit-row">Editar</button></a>
