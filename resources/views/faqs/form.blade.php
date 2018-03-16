@@ -1,21 +1,11 @@
 @extends('layouts.main')
 @section('content')
 <link rel="stylesheet" href="{{ asset('plugins/jquery-datatable/css/jquery.dataTables.css')}}"  type="text/css" media="screen"/>
-<style type="text/css">
-    textarea {
-        resize: none;
-    }
-    .select-error{
-        border-color: #A94442!important;
-        border-style: solid!important;
-        border-width: 1px!important;
-    }
-</style>
 <div class="text-center" style="margin: 20px;">
     <h2>{{$faq ? 'Editar' : 'Nueva'}} pregunta frecuente</h2>
     <div class="row-fluid">
         <div class="span12">
-            <div class="grid simple" style="display: none" id="form-container">
+            <div class="grid simple form-container" style="display: none">
                 <div class="grid-title">
                     <div class="grid-body">
                         <h3>Datos</h3>
@@ -52,7 +42,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="{{url('faqs')}}"><button type="button" class="btn btn-default" data-dismiss="modal">Regresar</button></a>
+                                <a href="{{url('admin/faqs')}}"><button type="button" class="btn btn-default" data-dismiss="modal">Regresar</button></a>
                                 <button type="submit" class="btn btn-primary save">
                                     <i class="fa fa-spinner fa-spin" style="display: none;"></i>
                                     Guardar
@@ -65,15 +55,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/validFunctions.js') }}"></script>
-<script src="{{ asset('js/generalAjax.js') }}"></script>
-<script type="text/javascript">
-    $(function(){
-        $(".select2").select2();
-
-        setTimeout(function() {
-            $('div#form-container').fadeIn('low');
-        }, 500)
-    })
-</script>
 @endsection

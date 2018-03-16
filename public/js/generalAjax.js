@@ -36,50 +36,29 @@ function ajaxForm(form_id, config) {
             }
         },
         error: function(xhr, status, error) {
-            swal.close();
-            if (/^[\],:{}\s]*$/.test(xhr.responseText.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-                display = JSON.parse(xhr.responseText).msg;
-            } else {
-                display = '';
-            }
-            swal({
-                title: '¡Error!',
-                icon: 'error',
-                content: {
-                    element: "div",
-                    attributes: {
-                        innerHTML:"Se encontró un problema guardando los datos: <br><span>" + display + "</span><br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>"
-                    },
-                },
-            }).catch(swal.noop);
+            displayAjaxError(xhr, status, error);
         }
     });
 }
 
-function ajaxSimple(data) {
-    url = baseUrl.concat(data.url);
+function ajaxSimple(config) {
     $.ajax({
-        method: "POST",
-        url: url,
-        data: data,
+        method: config.method ? config.method : "POST",
+        url: config.route,
+        data: config,
         success: function(data) {
             $('div.modal').modal('hide');
-            swal({
-                title: "<small>Bien</small>",
-                text: data.msg ? data.msg : "¡Cambios guardados exitosamente!",
-                type: data.status ? data.status : "success",
-                showLoaderOnConfirm: false,
-                html: true
-            });
-            refreshTable(window.location.href, data.columna, data.table_id, data.tabla_contenedor);
+            swal.close();
+            if (config.refresh) {
+                refreshTable(data.url, config.column, config.table_id, config.tabla_contenedor);
+            } else if(config.redirect) {
+                setTimeout( function() {
+                    window.location.href = data.url;
+                }, '2000');
+            }
         },
         error: function(xhr, status, error) {
-            swal({
-                title: "<small>¡Error!</small>",
-                text: "Se encontró un problema guardando cambios, por favor, trate nuevamente.<br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>",
-                type: 'error',
-                html: true
-            });
+            displayAjaxError(xhr, status, error);
         }
     });
 }
@@ -137,7 +116,7 @@ function ajaxMSimple(data) {
 
 function refreshTable(url, column, table_id, container_id) {
     var table = table_id ? $("table#"+table_id).dataTable() : $("table#example3").dataTable();
-    var container = container_id ? $("div#"+container_id) : $('div#table_container');
+    var container = container_id ? $("div#"+container_id) : $('div#table-container');
     table.fnDestroy();
     container.fadeOut();
     container.empty();
@@ -163,4 +142,23 @@ function fill_text(response, modal_id) {
     if (modal_id) {
         $('div#'+modal_id).modal();
     }
+}
+
+function displayAjaxError(xhr, status, error) {
+    swal.close();
+    if (/^[\],:{}\s]*$/.test(xhr.responseText.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+        display = JSON.parse(xhr.responseText).msg;
+    } else {
+        display = '';
+    }
+    swal({
+        title: '¡Error!',
+        icon: 'error',
+        content: {
+            element: "div",
+            attributes: {
+                innerHTML:"Se encontró un problema guardando cambios: <br><span>" + display + "</span><br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>"
+            },
+        },
+    }).catch(swal.noop);
 }

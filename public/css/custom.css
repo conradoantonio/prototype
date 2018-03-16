@@ -4,6 +4,11 @@ th {
 textarea {
     resize: none;
 }
+.select-error{
+    border-color: #A94442!important;
+    border-style: solid!important;
+    border-width: 1px!important;
+}
 .table td.text {
     max-width: 177px;
 }

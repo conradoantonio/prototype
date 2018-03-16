@@ -14,7 +14,7 @@ class FaqsController extends Controller
     public function index(Request $req)
     {
         $title = $menu = "Faqs";
-        $faqs = Faq::all();
+        $faqs = Faq::orderBy('id', 'desc')->get();
 
         if ($req->ajax()) {
             return view('faqs.table', ['faqs' => $faqs]);
@@ -89,11 +89,12 @@ class FaqsController extends Controller
     public function delete(Request $req)
     {
         $msg = count($req->ids) > 1 ? 'las preguntas' : 'la pregunta';
-        $catalogs = Faq::whereIn('id', $req->ids)
-        ->delete();
+        $faqs = Faq::whereIn('id', $req->ids)
+        ->get();
+        //->delete();
         //->update(['status' => $req->status]);
 
-        if ($catalogs) {
+        if ($faqs) {
             return response(['msg' => 'Éxito cambiando el status de '.$msg, 'status' => 'success', 'url' => url('admin/faqs')], 200);
         } else {
             return response(['msg' => 'Error al cambiar el status de '.$msg, 'status' => 'error', 'url' => url('admin/faqs')], 404);

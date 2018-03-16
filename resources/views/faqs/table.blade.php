@@ -7,10 +7,10 @@
         <th>Foto</th>
         <th>Acciones</th>
     </thead>
-    <tbody id="" class="">
+    <tbody>
         @if(count($faqs) > 0)                    
             @foreach($faqs as $faq)
-                <tr id="{{$faq->id}}">
+                <tr>
                     <td class="small-cell v-align-middle">
                         <div class="checkbox check-success">
                             <input id="checkbox{{$faq->id}}" type="checkbox" class="checkDelete" value="1">

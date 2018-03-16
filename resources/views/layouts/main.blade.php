@@ -346,6 +346,11 @@
             <script src="{{ asset('js/demo.js') }}" type="text/javascript"></script>
             <!-- END CORE TEMPLATE JS -->
 
+            <!-- BEGIN COMMON JS -->
+            <script src="{{ asset('js/validFunctions.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/generalAjax.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/globalFunctions.js') }}" type="text/javascript"></script>
+            <!-- END CORE TEMPLATE JS -->
 
             <div class="page-content">
                 <main style="padding-top:60px;">
@@ -359,12 +364,6 @@
         <!-- END CONTENT -->
         <!-- BEGIN CORE JS FRAMEWORK-->
         <script type="text/javascript">
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            
             var baseUrl = "{{url('')}}";
             window.b_url = "{{url('')}}";
             $('#change-pass, #cambiar_foto_usuario_sistema').on('hidden.bs.modal', function (e) {
