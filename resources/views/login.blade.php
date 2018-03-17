@@ -28,6 +28,7 @@
                             <form class="m-t-30 m-l-15 m-r-15" method="POST" action="login" autocomplete="off" id="form-log">
                                 {!! csrf_field() !!}
                                 <div class="form-group {{ $errors->has('msg') ? ' error' : '' }}" style="padding-bottom: 1px;">
+                                    <label class="form-label">Correo</label>
                                     <div class="controls">
                                         <input type="text" class="form-control" id="email" name="email" value="{{ @session('email') ? session('email') : '' }}" placeholder="Correo">
                                         @if ($errors->has('msg'))

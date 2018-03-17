@@ -21,6 +21,9 @@ Route::get('login', function () {
     return view('login');
 })->name('login');
 
+#Logout url
+Route::get('logout', 'LoginController@logout');
+
 #Route url
 Route::post('login', 'LoginController@index');
 

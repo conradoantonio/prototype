@@ -9,6 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="base-url" content="{{ url('') }}">
         <title></title>
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/noppa/text-security/master/dist/text-security.css">
         <link rel="stylesheet" href="{{ asset('plugins/pace/pace-theme-flash.css')}}"  type="text/css" media="screen"/>
         <link rel="stylesheet" href="{{ asset('plugins/jquery-scrollbar/jquery.scrollbar.css')}}"  type="text/css"/>
         <link rel="stylesheet" href="{{ asset('plugins/boostrapv3/css/bootstrap.min.css')}}"  type="text/css"/>
@@ -104,10 +105,10 @@
                                 <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="user-options">
                                     @if(auth()->user()->role_id == 1)
                                         <li><a data-toggle="modal" data-target="#cambiar_foto_usuario_sistema" href="#"><i class="fa fa-picture-o" aria-hidden="true"></i> Cambiar foto perfil</a></li>
-                                        <li><a data-toggle="modal" data-target="#change-pass" href="#"><i class="fa fa-key" aria-hidden="true"></i> Cambiar contraseña</a></li>
+                                        <li class="change-password"><a data-toggle="modal" href="#"><i class="fa fa-key" aria-hidden="true"></i> Cambiar contraseña</a></li>
                                         <li class="divider"></li>
                                     @endif
-                                    <li class="loggingOut"><a href="#"><i class="fa fa-power-off"></i> Cerrar sesión</a></li>
+                                    <li class="log-out"><a href="#"><i class="fa fa-power-off"></i> Cerrar sesión</a></li>
                                 </ul>
                             </li>
                             <!-- END SETTINGS -->
@@ -220,7 +221,7 @@
                     <!-- END ONE LEVEL MENU -->
                     
                     <!-- BEGIN SINGLE LINK -->
-                    <li class="loggingOut">
+                    <li class="log-out">
                         <a href="#">
                             <i class="fa fa-power-off last-li-item" aria-hidden="true"></i>
                             <span class="title">Cerrar sesión</span>
@@ -347,6 +348,7 @@
             <!-- END CORE TEMPLATE JS -->
 
             <!-- BEGIN COMMON JS -->
+            <script src="{{ asset('js/systemFunctions.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/validFunctions.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/generalAjax.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/globalFunctions.js') }}" type="text/javascript"></script>
@@ -366,79 +368,6 @@
         <script type="text/javascript">
             var baseUrl = "{{url('')}}";
             window.b_url = "{{url('')}}";
-
-            $('body').delegate('button#cambiar-password','click', function() {
-                $('#change-pass div.form-group').removeClass('has-error');//Remueve los errores de los campos
-
-                if ($('div#change-pass input#actualPassword').val() == '' ||
-                    $('div#change-pass input#newPassword').val() == '' ||
-                    $('div#change-pass input#confirmPassword').val() == '') {//Si algún campo está vacío no pasa
-                    $('div#change-pass input#actualPassword').val() == '' ? $('div#change-pass input#actualPassword').parent().addClass('has-error') : ''
-                    $('div#change-pass input#newPassword').val() == '' ? $('div#change-pass input#newPassword').parent().addClass('has-error') : ''
-                    $('div#change-pass input#confirmPassword').val() == '' ? $('div#change-pass input#confirmPassword').parent().addClass('has-error') : ''
-                    swal({
-                        title: "Llene todos los campos antes de continuar.",
-                        type: "error",
-                        showConfirmButton: true,
-                    });
-                }
-                else {
-                    var id = $('div#change-pass input#user_pass_id').val();
-                    var correo = '{{ auth()->user()->correo }}';
-                    var actualPassword = $('div#change-pass input#actualPassword').val();
-                    var newPassword = $('div#change-pass input#newPassword').val();
-                    var confirmPassword = $('div#change-pass input#confirmPassword').val();
-
-                    changePassword(id,correo,actualPassword,newPassword,confirmPassword,token);
-                }
-            });
-
-            function changePassword(id,correo,actualPassword,newPassword,confirmPassword) {
-                $.ajax({
-                    method: "POST",
-                    url: "{{url('/usuarios/sistema/change_password')}}",
-                    data:{
-                        "user_pass_id":id,
-                        "correo":correo,
-                        "actualPassword":actualPassword,
-                        "newPassword":newPassword,
-                        "confirmPassword":confirmPassword,
-                    },
-                    success: function(data) {
-                        $('div#change-pass div.form-group').removeClass('has-error');
-
-                        if (data == 'contra cambiada') {
-                            swal({
-                                title: "Contraseña modificada con éxito",
-                                type: "success",
-                                showConfirmButton: true,
-                            });
-                        } else if (data == 'contra nueva diferentes') {
-                            swal({
-                                title: "Las contraseñas deben ser iguales, corrijala antes de continuar",
-                                type: "error",
-                                showConfirmButton: true,
-                            });
-                            $('div#change-pass input#newPassword, div#change-pass input#confirmPassword').parent().addClass('has-error');
-                        } else if (data == 'contra erronea') {
-                            swal({
-                                title: "Debe proporcionar la contraseña actual para poder cambiarla",
-                                type: "error",
-                                showConfirmButton: true,
-                            });
-                            $('div#change-pass input#actualPassword').parent().addClass('has-error');
-                        }
-                        //$('#guardar-usuario-sistema').show();
-                    },
-                    error: function(xhr, status, error) {
-                        swal({
-                            title: "<small>Error!</small>",
-                            text: "Ha ocurrido un error mientras se cambiaba la contraseña, porfavor, trate nuevamente.<br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>",
-                            html: true
-                        });
-                    }
-                });
-            }
 
             mb = 0;
             fileExtension = ['jpg', 'jpeg', 'png'];
@@ -491,20 +420,6 @@
                     return true;
                 }
             }
-
-            $('body').delegate('.loggingOut','click', function() {
-                swal({
-                    title: "¿Desea cerrar la sesión?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Salir",
-                    cancelButtonText: "Cancelar",
-                    closeOnConfirm: false
-                },
-                function() {
-                    window.location.href = "{{url('')}}";
-                });
-            });
         </script>
 
     </body>

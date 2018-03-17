@@ -45,4 +45,14 @@ class LoginController extends Controller
 
         return view('layouts.dashboard', ['title' => $title, 'menu' => $menu]);
     }
+
+    /**
+     * Destroy's the current session.
+     *
+     */
+    public function logout() 
+    {
+        auth()->logout();
+        return redirect('/');
+    }
 }
