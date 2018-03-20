@@ -147,7 +147,7 @@
 
                     <!-- BEGIN SELECTED LINK -->
                     <li class="start {{$menu == 'Inicio' ? 'active' : ''}}">
-                        <a href="{{url('dashboard')}}">
+                        <a href="{{url('admin/dashboard')}}">
                             <i class="icon-custom-home"></i>
                             <span class="title">Inicio</span>
                             <span class="selected"></span>

@@ -22,7 +22,7 @@ textarea {
 .pass-font{
 	font-family: "text-security-disc"!important;
 }
-ul#error_list {
+ul.error_list {
 	list-style-type: none;
 	padding: 0px;
 	color: firebrick;

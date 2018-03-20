@@ -169,7 +169,7 @@ $(function(){
                 content: {
                     element: "div",
                     attributes: {
-                        innerHTML:"<ul id='error_list'>"+msgError+"</ul>"
+                        innerHTML:"<ul class='error_list'>"+msgError+"</ul>"
                     },
                 }
             }).catch(swal.noop);

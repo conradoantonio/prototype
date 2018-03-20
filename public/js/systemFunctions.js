@@ -1,4 +1,5 @@
 $(function() {
+    //Log out swal
     $('body').delegate('.log-out','click', function() {
         swal({
             title: '¿Desea cerrar la sesión?',
@@ -12,10 +13,20 @@ $(function() {
         }).catch(swal.noop);
     });
 
+    //Display a swal to change the password
     $('body').delegate('.change-password','click', function() {
         swal({
             title: 'Complete los siguientes campos: ',
-            buttons:["Cancelar", "Aceptar"],
+            buttons: {
+                cancel: "Cancelar",
+                confirm_p: {
+                    text: "Aceptar",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: false
+                },
+            },
             content: {
                 element: "form",
                 attributes: {
@@ -41,72 +52,86 @@ $(function() {
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
+                            "<ul class='error_list'>"+
+                                "<li style='display: none;' id='error-fields'>Complete todos los campos</li>"+
+                                "<li style='display: none;' id='error-pass'>Contraseña errónea</li>"+
+                                "<li style='display: none;' id='error-pass-different'>No coinciden las contraseñas</li>"+
+                            "</ul>"+
                         "</form>"
                 },
-            }
-        }).then((accept) => {
-            if (accept){
-                current_pass = $('#current-password').val();
-                new_pass = $('#new-password').val();
-                confirm_pass = $('#confirm-password').val();
-
-                console.log(current_pass);
-                config = {
-                    'route'     : 'sa',
-                    'ids'       : 'asdasd',
-                    'refresh'   : true,
-                }
-                //console.log(config);
             }
         }).catch(swal.noop);
     });
 
-            function changePassword(id,correo,actualPassword,newPassword,confirmPassword) {
-                $.ajax({
-                    method: "POST",
-                    url: "{{url('/usuarios/sistema/change_password')}}",
-                    data:{
-                        "user_pass_id":id,
-                        "correo":correo,
-                        "actualPassword":actualPassword,
-                        "newPassword":newPassword,
-                        "confirmPassword":confirmPassword,
-                    },
-                    success: function(data) {
-                        $('div#change-pass div.form-group').removeClass('has-error');
+    //Validate the modal for change the password
+    $('body').delegate('.swal-button--confirm_p','click', function() {
+        current_pass = $('#current-password').val();
+        new_pass = $('#new-password').val();
+        confirm_pass = $('#confirm-password').val();
 
-                        if (data == 'contra cambiada') {
-                            swal({
-                                title: "Contraseña modificada con éxito",
-                                type: "success",
-                                showConfirmButton: true,
-                            });
-                        } else if (data == 'contra nueva diferentes') {
-                            swal({
-                                title: "Las contraseñas deben ser iguales, corrijala antes de continuar",
-                                type: "error",
-                                showConfirmButton: true,
-                            });
-                            $('div#change-pass input#newPassword, div#change-pass input#confirmPassword').parent().addClass('has-error');
-                        } else if (data == 'contra erronea') {
-                            swal({
-                                title: "Debe proporcionar la contraseña actual para poder cambiarla",
-                                type: "error",
-                                showConfirmButton: true,
-                            });
-                            $('div#change-pass input#actualPassword').parent().addClass('has-error');
-                        }
-                        //$('#guardar-usuario-sistema').show();
-                    },
-                    error: function(xhr, status, error) {
-                        swal({
-                            title: "<small>Error!</small>",
-                            text: "Ha ocurrido un error mientras se cambiaba la contraseña, porfavor, trate nuevamente.<br><span style='color:#F8BB86'>\nError: " + xhr.status + " (" + error + ") "+"</span>",
-                            html: true
-                        });
-                    }
-                });
+        if (!current_pass || !new_pass || !confirm_pass) {//Empty fields
+            $('li#error-fields').fadeIn();
+            swal.stopLoading();
+        } else if (!($('#confirm-password').val() == $('#new-password').val())) {//Different password
+            $('li#error-pass-different').fadeIn();
+            swal.stopLoading();
+        } else {//Everything ok
+            config = {
+                'current_pass'  : current_pass,
+                'new_pass'      : new_pass,
+                'confirm_pass'  : confirm_pass,
+                'route'         : baseUrl.concat('/admin/system/change-password'),
+                'method'        : 'POST',
             }
+            requestNewPassword(config);
+        }
+    });
 
-    
+    //Verify if all fields are filled
+    $('body').delegate('.pass-font','blur', function() {
+        if (!$('#current-password').val() || !$('#new-password').val() || !$('#confirm-password').val()) {
+            $('li#error-fields').fadeIn();
+        } else {
+            $('li#error-fields').fadeOut();
+        }
+    });
+
+    //Verify if the new password is the same that confirm password
+    $('body').delegate('#confirm-password, #new-password','blur', function() {
+        if ($('#confirm-password').val() == $('#new-password').val()) {
+            $('li#error-pass-different').fadeOut();
+        } else {
+            $('li#error-pass-different').fadeIn();
+        }
+    });
+
+    //Ajax to change the password
+    function requestNewPassword(config) {
+        $.ajax({
+            method: config.method ? config.method : "POST",
+            type: "POST",
+            url: config.route,
+            data: config,
+            success: function(data) {
+                swal.stopLoading();
+                if (data.status == 'ok') {
+                    $('li#error-pass').fadeOut();
+                    swal({
+                        title: data.msg,
+                        icon: "success",
+                        buttons: [false, "Aceptar"],
+                        timer: 2000
+                    }).catch(swal.noop);
+                } else {
+                    if (data.status == 'error') {
+                        $('li#error-pass').fadeIn();
+                    }
+                }
+            },
+            error: function(xhr, status, error) {
+                swal.stopLoading();
+                displayAjaxError(xhr, status, error);
+            }
+        });
+    }
 });

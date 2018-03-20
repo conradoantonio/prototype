@@ -39,7 +39,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     	Route::post('update', 'FaqsController@update');
     	Route::post('delete', 'FaqsController@delete');
 	});
-    
-    Route::get('users', 'UsersController@index')->middleware('role:Administrador');
+
+    #System API
+    Route::middleware(['role:Administrador'])->prefix('system')->group(function () {
+        Route::post('change-password', 'UsersController@change_password');//Change to another group with different privileges and prefix
+        Route::post('change-prifile', 'UsersController@change_password');//Change to another group with different privileges and prefix
+    });
+
+    #Users CRUD and API
+    Route::middleware(['role:Administrador'])->prefix('users')->group(function () {
+        Route::get('/', 'UsersController@index');
+    });
 });
 

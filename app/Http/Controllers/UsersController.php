@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use \App\User;
 use Illuminate\Http\Request;
 
@@ -36,13 +37,15 @@ class UsersController extends Controller
                 if ($req->new_pass == $req->confirm_pass) {
                     $user->password = bcrypt($req->new_pass);
                     $user->save();
-                    return response(['msg' => 'Contraseña cambiada', 'status' => 'ok'], 200);
+                    return response(['msg' => 'Contraseña modificada exitósamente', 'status' => 'ok'], 200);
                 } else {
                     return response(['msg' => 'Las contraseñas no coinciden', 'status' => 'error'], 200);
                 }
             } else {
                 return response(['msg' => 'Contraseña errónea', 'status' => 'error'], 200);
             }
+        } else {
+            return response(['msg' => 'Usuario no válido o sesión expirada', 'status' => 'error'], 403);
         }
     }
 
