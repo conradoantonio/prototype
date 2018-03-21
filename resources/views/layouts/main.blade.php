@@ -348,6 +348,7 @@
             <!-- END CORE TEMPLATE JS -->
 
             <!-- BEGIN COMMON JS -->
+            <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
             <script src="{{ asset('js/systemFunctions.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/validFunctions.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/generalAjax.js') }}" type="text/javascript"></script>

@@ -23,6 +23,10 @@ Route::get('login', function () {
 
 #Logout url
 Route::get('logout', 'LoginController@logout');
+Route::get('test', function(){
+    event(new App\Events\PusherEvent('Hi there Pusher!'));
+    return 'Event sent';
+});
 
 #Route url
 Route::post('login', 'LoginController@index');

@@ -103,4 +103,16 @@ $(function() {
             }
         }).catch(swal.noop);
     }
+
+    Pusher.logToConsole = false;
+
+    var pusher = new Pusher('aa2627d74b476e17c6d1', {
+      cluster: 'us2',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(data.message);
+    });
 });
