@@ -285,9 +285,9 @@ $(document).ready(function() {
             }
         },
         "aoColumnDefs": [
-            { "aTargets": [ 0 ] }
+            { "aTargets": [ 1 ] }
         ],
-        "aaSorting": [[ 0, "desc" ]],
+        "aaSorting": [[ 1, "desc" ]],
 				"oLanguage": {
 			"sLengthMenu": "_MENU_ ",
 			"sInfo": "Mostrando <b>_START_ a _END_</b> de _TOTAL_ registros"

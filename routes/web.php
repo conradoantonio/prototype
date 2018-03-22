@@ -23,6 +23,8 @@ Route::get('login', function () {
 
 #Logout url
 Route::get('logout', 'LoginController@logout');
+
+#Code created by Luis (Geno-sama), the leader of the first world!!!!!, he bring us peace for everyone... the real one majesty!
 Route::get('test', function(){
     event(new App\Events\PusherEvent('Hi there Pusher!'));
     return 'Event sent';
@@ -43,6 +45,15 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     	Route::post('update', 'FaqsController@update');
     	Route::post('delete', 'FaqsController@delete');
 	});
+
+    #News CRUD
+    Route::middleware(['role:Administrador'])->prefix('noticias')->group(function () {
+        Route::get('/', 'NewsController@index');
+        Route::get('form/{id?}', 'NewsController@form');
+        Route::post('save', 'NewsController@save');
+        Route::post('update', 'NewsController@update');
+        Route::post('delete', 'NewsController@delete');
+    });
 
     #System API
     Route::middleware(['role:Administrador'])->prefix('system')->group(function () {

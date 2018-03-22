@@ -99,9 +99,11 @@ CREATE TABLE `faqs` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `faqs` */
+
+insert  into `faqs`(`id`,`question`,`answer`,`img`,`created_at`,`updated_at`) values (1,'¿Puedo recibir notificaciones?','Claro que si, sólo necesitas contar con conexión a internet!','img/default.jpg','2018-03-13 12:57:15','2018-03-13 00:14:40'),(2,'¿La aplicación está disponible para Android y Ios?','La aplicación está disponible para ambas plataformas y reciben actualizaciones de forma constante.','img/faqs/1521226610.jpg','2018-03-16 12:56:50','2018-03-16 18:56:50'),(3,'¿Cuando saber si se realizo mi cobro? ','Cuando tu compra se realizo correctamente deberá aparecer un mensaje que diga: ¡Gracias por tu pago! En la opción de pedidos, puede visualizarse sus compras.','img/default.jpg','2018-03-21 15:51:09','0000-00-00 00:00:00');
 
 /*Table structure for table `genre` */
 
@@ -256,7 +258,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`password`,`name`,`lastname`,`email`,`img`,`phone`,`conekta_customer_id`,`role_id`,`social_network`,`player_id`,`status`,`remember_token`,`created_at`,`updated_at`) values (1,'$2y$10$WKY9J1RDcn9/5Va9C9QDWOHCbfWSdXYTAf6akZgQFhJEBfmVh8eL6','Conrado','Carrillo','anton_con@hotmail.com','img/default.jpg','6691293591',NULL,1,NULL,NULL,1,'jipo4N8KxeHsaIqFo1354M7ZiFoYYPNqvdv8Ity2vSUZtYh0m7HFXnMdey9p','2018-02-28 18:09:35','0000-00-00 00:00:00'),(2,'$2y$10$WKY9J1RDcn9/5Va9C9QDWOHCbfWSdXYTAf6akZgQFhJEBfmVh8eL6','Antonio','Rosales','conrado.carrillo@gmail.com','img/default.jpg','6699333627',NULL,2,NULL,NULL,1,NULL,'2018-03-01 12:40:06','0000-00-00 00:00:00');
+insert  into `users`(`id`,`password`,`name`,`lastname`,`email`,`img`,`phone`,`conekta_customer_id`,`role_id`,`social_network`,`player_id`,`status`,`remember_token`,`created_at`,`updated_at`) values (1,'$2y$10$UBcGlPsa3QZmoe497eE02OOrADM.In0yE7lFoJPBZuycxVLqxHode','Conrado','Carrillo','anton_con@hotmail.com','img/default.jpg','6691293591',NULL,1,NULL,NULL,1,'7WgONIDl5Eu4bpm6rfp6Q7kAtu4QrGajK3ibHSsRytKRVmoeTrt04KpeJvZ7','2018-02-28 18:09:35','2018-03-20 23:09:10'),(2,'$2y$10$WKY9J1RDcn9/5Va9C9QDWOHCbfWSdXYTAf6akZgQFhJEBfmVh8eL6','Antonio','Rosales','conrado.carrillo@gmail.com','img/default.jpg','6699333627',NULL,2,NULL,NULL,1,NULL,'2018-03-01 12:40:06','0000-00-00 00:00:00');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

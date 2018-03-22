@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="base-url" content="{{ url('') }}">
+        <meta name="user-id" content="{{ auth()->user()->id }}">
         <title></title>
         <link rel="stylesheet" type="text/css" href="https://rawgit.com/noppa/text-security/master/dist/text-security.css">
         <link rel="stylesheet" href="{{ asset('plugins/pace/pace-theme-flash.css')}}"  type="text/css" media="screen"/>
@@ -176,7 +177,7 @@
 
                     <!-- BEGIN SINGLE LINK -->
                     <li class="{{$menu == 'Noticias' ? 'active' : ''}}">
-                        <a href="{{url('noticias')}}">
+                        <a href="{{url('admin/noticias')}}">
                             <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                             <span class="title">Noticias</span>
                         </a>
@@ -368,8 +369,7 @@
         <!-- BEGIN CORE JS FRAMEWORK-->
         <script type="text/javascript">
             var baseUrl = "{{url('')}}";
-            window.b_url = "{{url('')}}";
-
+            var current_user_id = $('meta[name=user-id]').attr('content');
             mb = 0;
             fileExtension = ['jpg', 'jpeg', 'png'];
             var msgError = '';

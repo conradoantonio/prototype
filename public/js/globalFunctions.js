@@ -36,6 +36,7 @@ $(function() {
     //Send a request for multiple delete
     $('body').delegate('.delete-row','click', function() {
         var route = $('div.general-info').data('url');
+        var refresh = $('div.general-info').data('refresh');
         var ids_array = [];
         var row_id = $(this).parent().siblings("td:nth-child(2)").text();
         ids_array.push(row_id);
@@ -50,7 +51,7 @@ $(function() {
                 config = {
                     'route'     : route,
                     'ids'       : ids_array,
-                    'refresh'   : true,
+                    'refresh'   : refresh,
                 }
                 loadingMessage();
                 ajaxSimple(config);
@@ -61,6 +62,7 @@ $(function() {
     //Send a request for a single delete
     $('body').delegate('.delete-rows','click', function() {
         var route = $('div.general-info').data('url');
+        var refresh = $('div.general-info').data('refresh');
         var ids_array = [];
         $("input.checkDelete").each(function() {
             if($(this).is(':checked')) {
@@ -79,7 +81,7 @@ $(function() {
                     config = {
                         'route'     : route,
                         'ids'       : ids_array,
-                        'refresh'   : true,
+                        'refresh'   : refresh,
                     }
                     loadingMessage();
                     ajaxSimple(config);
@@ -112,7 +114,11 @@ $(function() {
     });
 
     var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(data.message);
+    channel.bind('my-event', function(e) {
+        if ( e.data.url == window.location.href ) {
+            refreshTable(e.data.url);
+        } else {
+            console.log('no debería mostrarse kappa');
+        }
     });
 });

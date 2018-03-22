@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Faq;
+use \App\Events\PusherEvent;
 use Illuminate\Http\Request;
 
 class FaqsController extends Controller
@@ -95,6 +96,7 @@ class FaqsController extends Controller
         //->update(['status' => $req->status]);
 
         if ($faqs) {
+            event(new PusherEvent(['url' => url('admin/faqs'), 'user_id' => auth()->user()->id, 'message' => 'Refresh that table bro!']));
             return response(['msg' => 'Éxito cambiando el status de '.$msg, 'status' => 'success', 'url' => url('admin/faqs')], 200);
         } else {
             return response(['msg' => 'Error al cambiar el status de '.$msg, 'status' => 'error', 'url' => url('admin/faqs')], 404);
