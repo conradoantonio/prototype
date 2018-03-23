@@ -57,11 +57,17 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     #System API
     Route::middleware(['role:Administrador'])->prefix('system')->group(function () {
-        Route::post('change-password', 'UsersController@change_password');//Change to another group with different privileges and prefix
-        Route::post('change-prifile', 'UsersController@change_password');//Change to another group with different privileges and prefix
+        Route::post('change-password', 'UsersController@change_password');
+        Route::post('change-profile', 'UsersController@change_profile');
     });
 
-    #Users CRUD and API
+    #Notifications API
+    Route::middleware(['role:Administrador'])->prefix('notificaciones')->group(function () {
+        Route::get('/', 'NotificationsController@index');
+        Route::post('send-notification', 'NotificationsController@send_notificationss');
+    });
+
+    #Users CRUD
     Route::middleware(['role:Administrador'])->prefix('users')->group(function () {
         Route::get('/', 'UsersController@index');
     });

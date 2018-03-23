@@ -168,7 +168,7 @@
 
                     <!-- BEGIN SINGLE LINK -->
                     <li class="{{$menu == 'Notificaciones' ? 'active' : ''}}">
-                        <a href="{{url('notificaciones_app')}}">
+                        <a href="{{url('admin/notificaciones')}}">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <span class="title">Notificaciones app</span>
                         </a>

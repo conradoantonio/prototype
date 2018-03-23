@@ -106,6 +106,7 @@ $(function() {
         }).catch(swal.noop);
     }
 
+    //Code made by god (Your majesty, the only one, the choosen one and the divine one (bitch!)). The piecekeeper! KappaPride :B
     Pusher.logToConsole = false;
 
     var pusher = new Pusher('aa2627d74b476e17c6d1', {

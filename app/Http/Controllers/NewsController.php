@@ -56,7 +56,9 @@ class NewsController extends Controller
 
         $new->save();
 
-        return response(['msg' => 'Nueva noticia registrada correctamente', 'status' => 'success', 'url' => url('admin/noticias')], 200);
+        $data = ['url' => url('admin/noticias'), 'user_id' => $this->current_user->id, 'status' => 'success' ,'msg' => 'Noticia registrada correctamente'];
+        event(new PusherEvent($data));
+        return response($data, 200);
     }
 
     /**
@@ -75,8 +77,9 @@ class NewsController extends Controller
 	        $img ? $new->img = $img : '';
 
 	        $new->save();
-            event(new PusherEvent(['url' => url('admin/noticias'), 'user_id' => auth()->user()->id, 'message' => 'Refresh that table bro!']));
-	        return response(['msg' => 'noticia actualizada correctamente', 'status' => 'success', 'url' => url('admin/noticias')], 200);
+            $data = ['url' => url('admin/noticias'), 'user_id' => $this->current_user->id, 'status' => 'success' ,'msg' => 'noticia actualizada correctamente'];
+            event(new PusherEvent($data));
+	        return response($data, 200);
         }
 
 	    return response(['msg' => 'No se encontró la noticia a editar', 'status' => 'error', 'url' => url('admin/noticias')], 404);
@@ -91,11 +94,12 @@ class NewsController extends Controller
     {
         $msg = count($req->ids) > 1 ? 'las noticias' : 'la noticia';
         $news = News::whereIn('id', $req->ids)
-        ->delete();
-
+        ->get();
+        #->delete();
         if ($news) {
-            event(new PusherEvent(['url' => url('admin/noticias'), 'user_id' => auth()->user()->id, 'message' => 'Refresh that table bro!']));
-            return response(['msg' => 'Éxito cambiando el status de '.$msg, 'status' => 'success', 'url' => url('admin/noticias')], 200);
+            $data = ['url' => url('admin/noticias'), 'user_id' => $this->current_user->id, 'status' => 'success' ,'msg' => 'Éxito cambiando el status de '.$msg];
+            event(new PusherEvent($data));
+            return response($data, 200);
         } else {
             return response(['msg' => 'Error al cambiar el status de '.$msg, 'status' => 'error', 'url' => url('admin/noticias')], 404);
         }

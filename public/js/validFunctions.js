@@ -161,7 +161,7 @@ $(function(){
                 'container_id'  : form.data('container_id'),
             }
             if (ajaxType == 'ajax-form') { ajaxForm(form.attr('id'), config); }
-            if (ajaxType == 'ajax-form') { ajaxFormModal(form.attr('id'), config); }
+            else if (ajaxType == 'ajax-form-modal') { ajaxFormModal(form.attr('id'), config); }
         } else {
             swal({
                 title: 'Verifique los siguientes campos: ',
