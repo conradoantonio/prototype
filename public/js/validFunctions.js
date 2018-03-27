@@ -18,8 +18,8 @@ $(function(){
     var btn_form = $(".save");
 
     $(".not-empty").blur(function() {
-        if ( $(this).val() || $(this).val()  != 0 ){
-            if ($(this).hasClass('select2')) {//Si es un select2 se agrega un error especial
+        if ( $(this).val() || $(this).val() != 0 ) {
+            if ($(this).hasClass('select2')) {//Si es un select2 se remueve un error especial
                 $(this).parent().children('div.select2').children('ul.select2-choices').removeClass("select-error");
             } else {
                 $(this).parent().removeClass('has-error');
@@ -69,7 +69,11 @@ $(function(){
                     inputs.push($(this).data('msg'));
                     msgError = msgError +"<li>"+$(this).data('msg')+": Campo vacio</li>";
                 } else {
-                    $(this).parent().removeClass('has-error')
+                    if ($(this).hasClass('select2')) {
+                        $(this).parent().children('div.select2').children('ul.select2-choices').removeClass("select-error");
+                    } else {
+                        $(this).parent().removeClass('has-error');
+                    }
                 }
             }
 

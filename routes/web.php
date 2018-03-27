@@ -64,7 +64,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     #Notifications API
     Route::middleware(['role:Administrador'])->prefix('notificaciones')->group(function () {
         Route::get('/', 'NotificationsController@index');
-        Route::post('send-notification', 'NotificationsController@send_notificationss');
+        Route::post('send-notification', 'NotificationsController@get_notification_parameters');
     });
 
     #Users CRUD

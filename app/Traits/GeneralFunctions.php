@@ -2,12 +2,9 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Facades\File;
 use Image;
-
-/*require_once("conekta-php-master/lib/Conekta.php");
-\Conekta\Conekta::setApiKey("key_rKc4BNk2zVQ44qYxntA7YQ");
-\Conekta\Conekta::setApiVersion("2.0.0");*/
+use \App\User;
+use Illuminate\Support\Facades\File;
 
 trait GeneralFunctions
 {
@@ -54,7 +51,59 @@ trait GeneralFunctions
      *
      * @return $name
      */
-    public function send_notification()
+    public function send_notification($type, $app_id, $app_key, $app_icon, $title, $content, $date, $time, $data, $users_id)
     {
+        $player_ids = array();
+        
+        $header = array(
+            "en" => $title
+        );
+
+        $msg = array(
+            "en" => $content
+        );
+        
+        $fields = array(
+            'app_id' => $app_id,
+            'data' => $data,
+            'headings' => $header,
+            'contents' => $msg,
+            'large_icon' => $app_icon
+        );
+
+        if ($type == 1) {//General notification
+            $fields['included_segments'] = array('All');
+        } 
+
+        else if ($type == 2) {//Individual notification
+            foreach($users_id as $id) {
+                $user = User::find($id);
+                $player_ids [] = $user->player_id;
+            }
+            $fields['include_player_ids'] = $player_ids;
+        }
+
+        if ($date && $time) {
+            $time_zone = $date.' '.$time;
+            $time_zone = $this->summer ? $time_zone.' '.'UTC-0500' : $time_zone.' '.'UTC-0600';
+            $fields['send_after'] = $time_zone;
+        }
+
+        $fields = json_encode($fields);
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
+                                                   "Authorization: Basic $app_key"));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        return $response;
     }
 }

@@ -8,6 +8,10 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/*require_once("conekta-php-master/lib/Conekta.php");
+\Conekta\Conekta::setApiKey("key_rKc4BNk2zVQ44qYxntA7YQ");
+\Conekta\Conekta::setApiVersion("2.0.0");*/
+
 class Controller extends BaseController
 {
 	#Declare a middleware in the construct, so we can access to the current user!

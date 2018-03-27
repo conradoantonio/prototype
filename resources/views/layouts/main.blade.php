@@ -338,7 +338,7 @@
             <script src="{{ asset('plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/pace/pace.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/jquery-numberAnimate/jquery.animateNumbers.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('js/select2.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('plugins/bootstrap-select2/select2.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/chart.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type='text/javascript'></script>
             <script src="{{ asset('plugins/boostrap-clockpicker/bootstrap-clockpicker.min.js') }}" type="text/javascript"></script>

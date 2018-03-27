@@ -44,7 +44,7 @@
 				<textarea class="form-control not-empty" id="content" name="content" maxlength="140" data-msg="Contenido del mensaje" placeholder="Describa en menos de 140 caracteres el contenido de la notificación" rows="3">{{ isset($datos) ? $datos->direccion : "" }}</textarea>    
             </div>
         </div>
-        <div class="col-md-12 hide">
+        <div class="col-md-12 users-content" style="display:none;"">
             <div class="form-group">
                 <label for="users_id">Usuarios</label>
 				<select name="users_id[]" id="users_id" class="select2" multiple="multiple" data-msg="Usuarios" style="width: 100%">
