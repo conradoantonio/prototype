@@ -326,12 +326,14 @@
             <script src="{{ asset('js/lightbox.js') }}"></script>
 
             <!-- BEGIN CORE JS FRAMEWORK-->
+            
             <!--<script src="{{ asset('plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>-->
             <script src="{{ asset('plugins/boostrapv3/js/bootstrap.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/breakpoints.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/jquery-unveil/jquery.unveil.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/jquery-block-ui/jqueryblockui.js') }}" type="text/javascript"></script>
             <!-- END CORE JS FRAMEWORK -->
+            
             <!-- BEGIN PAGE LEVEL JS -->
             <script src="{{ asset('plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/pace/pace.min.js') }}" type="text/javascript"></script>
@@ -339,7 +341,7 @@
             <script src="{{ asset('js/select2.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/chart.js') }}" type="text/javascript"></script>
             <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type='text/javascript'></script>
-
+            <script src="{{ asset('plugins/boostrap-clockpicker/bootstrap-clockpicker.min.js') }}" type="text/javascript"></script>
             <!-- END PAGE LEVEL PLUGINS -->
 
             <!-- BEGIN CORE TEMPLATE JS -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \App\User;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
@@ -13,19 +14,18 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        $title = 'Notificaciones App';
-        $menu = 'Ionic';
-        $actual_date = date('Y-m-d');
-        $clientes = Usuario::where('tipo', 1)->where('status', 1)->get();
-        $repartidores = Usuario::where('tipo', 2)->where('status', 1)->get();
-        return view('notificaciones.index', ['menu' => $menu, 'title' => $title, 'clientes' => $clientes, 'repartidores' => $repartidores, 'start_date' => $actual_date]);
+        $title = $menu = 'Notificaciones';
+        $actual_date = $this->actual_date;
+        $customers = User::where('role_id', 2)->where('status', 1)->get();
+        $deliverers = User::where('role_id', 3)->where('status', 1)->get();
+        return view('notifications.index', ['menu' => $menu, 'title' => $title, 'customers' => $customers, 'deliverers' => $deliverers, 'start_date' => $actual_date]);
     }
 
     /**
-    * Envía una notificación a todos los usuarios de la aplicación
+    * Get the notifications parameters, so, we can decide if send a individual or general notification. 
     * @return $response
     */
-    public function enviar_notificacion_general(Request $req) 
+    public function get_notification_parameters(Request $req) 
     {
         $mensaje = $req->mensaje;
         $titulo = $req->titulo;

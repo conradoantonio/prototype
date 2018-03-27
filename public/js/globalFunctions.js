@@ -11,11 +11,11 @@ $(function() {
         $('div.row-fluid, div.form-container').fadeIn('low');
     }, 500);
 
-    //Verify if the button for delete multiple can be actionable
+    //Verify if the button for delete multiple can be clickable
     $('body').delegate('.checkDelete','click', function() {
         var ids_lenght = [];
         $("input.checkDelete").each(function() {
-            if($(this).is(':checked')) {
+            if ($(this).is(':checked')) {
                 ids_lenght.push($(this).parent().parent().siblings("td:nth-child(2)").text());
             }
         });
@@ -24,7 +24,19 @@ $(function() {
     });
 
     //Set up the select 2 inputs
-    $(".select2").select2();
+    $("select.select2").select2();
+
+    //Set up the clockpicker inputs
+    $('.clockpicker ').clockpicker({
+        autoclose: true
+    });
+
+    //Set up the datepiciker inputs
+    $( ".date-picker" ).datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
+    });
 
     //Clear modal inputs
     $('div.modal').on('hidden.bs.modal', function (e) {
@@ -110,8 +122,8 @@ $(function() {
     Pusher.logToConsole = false;
 
     var pusher = new Pusher('aa2627d74b476e17c6d1', {
-      cluster: 'us2',
-      encrypted: true
+        cluster: 'us2',
+        encrypted: true
     });
 
     var channel = pusher.subscribe('my-channel');

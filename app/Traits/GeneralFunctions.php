@@ -48,4 +48,13 @@ trait GeneralFunctions
             return null;
         }
     }
+
+    /**
+     * Send a notification to a single user or a group of users.
+     *
+     * @return $name
+     */
+    public function send_notification()
+    {
+    }
 }
